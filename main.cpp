@@ -158,11 +158,13 @@ void Run()
                     inc+= .1;
                     zoom = exp(-1 * inc);
                     //maxIters = exp(inc) + 499 * 2;
+                    cout << zoom << endl;
                     break;
                 case SDLK_q:
                     inc-= .1;
                     zoom = exp(-1 * inc);
                     //maxIters = exp(inc) + 499 * 2;
+                    cout << zoom << endl;
                     break;
                 case SDLK_r:
                     maxIters += 100;
