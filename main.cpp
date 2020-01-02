@@ -133,15 +133,6 @@ void Run()
                 case SDLK_ESCAPE:
                     gameLoop = false;
                     break;
-                default:
-                    break;
-                }
-            }
-
-            if (event.type == SDL_KEYUP)
-            {
-                switch (event.key.keysym.sym)
-                {
                 case SDLK_w:
                     wp = true;
                     break;
@@ -180,6 +171,15 @@ void Run()
                     else
                         resolution = 2;
                     break;
+                default:
+                    break;
+                }
+            }
+
+            if (event.type == SDL_KEYUP)
+            {
+                switch (event.key.keysym.sym)
+                {
                 default:
                     break;
                 }
