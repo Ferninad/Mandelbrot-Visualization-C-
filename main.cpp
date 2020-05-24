@@ -16,12 +16,12 @@ SDL_Renderer *renderer = nullptr;
 
 int screenWidth = 500;
 int screenHeight = 500;
-double zoom = 1;
-double inc = 0;
+long double zoom = 1;
+long double inc = 0;
 int maxIters = 500;
 int resolution = 2;
-double x = 0;
-double y = 0;
+long double x = 0;
+long double y = 0;
 bool wp = false;
 bool sp = false;
 bool ap = false;
@@ -187,6 +187,7 @@ void Run()
         }
     }
 }
+
 void MandelbrotH(){  //with Histogram coloring
     if(wp){
         y -= exp(-1 * inc)/2;
@@ -204,31 +205,31 @@ void MandelbrotH(){  //with Histogram coloring
         x += exp(-1 * inc)/2;
         dp = false;
     }
-    double minx = x - zoom;
-    double maxx = x + zoom;
-    double miny = y - zoom;
-    double maxy = y + zoom;
+    long double minx = x - zoom;
+    long double maxx = x + zoom;
+    long double miny = y - zoom;
+    long double maxy = y + zoom;
 
-    vector<double> ys;
+    vector<long double> ys;
     
-    for(int x = 0; x < screenWidth; x++){
-        for(int y = 0; y < screenHeight; y++){
-            double zr = ScaleNum(x, 0, screenWidth, minx, maxx);
-            double zi = ScaleNum(y, 0, screenHeight, miny, maxy);
-            double cr = zr;
-            double ci = zi;
+    for(int x = 0; x < screenWidth; x+=resolution){
+        for(int y = 0; y < screenHeight; y+=resolution){
+            long double zr = ScaleNum(x, 0, screenWidth, minx, maxx);
+            long double zi = ScaleNum(y, 0, screenHeight, miny, maxy);
+            long double cr = zr;
+            long double ci = zi;
 
             double n = 0;
 
             while (n < maxIters) {
-                double aa = zr * zr;
-                double bb = zi * zi;
+                long double aa = zr * zr;
+                long double bb = zi * zi;
                 
                 if (aa + bb > 4.0) {
                     break;  // Bail
                 }
                 
-                double Nab = N * zr * zi;
+                long double Nab = N * zr * zi;
                 zr = aa - bb + cr;
                 zi = Nab + ci;
                 n++;
@@ -243,7 +244,7 @@ void MandelbrotH(){  //with Histogram coloring
     }
     for(int x = 0; x < screenWidth; x++){
         for(int y = 0; y < screenHeight; y++){
-            double incre = IterationCounts[x][y];
+            long double incre = IterationCounts[x][y];
             NumIterationsPerPixel[incre] = NumIterationsPerPixel[incre] + 1;
         }
     }
@@ -290,29 +291,29 @@ void Mandelbrot(){   //Without Histogram coloring
         x += exp(-1 * inc)/2;
         dp = false;
     }
-    double minx = x - zoom;
-    double maxx = x + zoom;
-    double miny = y - zoom;
-    double maxy = y + zoom;
+    long double minx = x - zoom;
+    long double maxx = x + zoom;
+    long double miny = y - zoom;
+    long double maxy = y + zoom;
 
     for(int x = 0; x < screenWidth; x+=resolution){
         for(int y = 0; y < screenHeight; y+=resolution){
-            double zr = ScaleNum(x, 0, screenWidth, minx, maxx);
-            double zi = ScaleNum(y, 0, screenHeight, miny, maxy);
-            double cr = zr;
-            double ci = zi;
+            long double zr = ScaleNum(x, 0, screenWidth, minx, maxx);
+            long double zi = ScaleNum(y, 0, screenHeight, miny, maxy);
+            long double cr = zr;
+            long double ci = zi;
 
-            double n = 0;
+            int n = 0;
 
             while (n < maxIters) {
-                double aa = zr * zr;
-                double bb = zi * zi;
+                long double aa = zr * zr;
+                long double bb = zi * zi;
                 
                 if (aa + bb > 4.0) {
                     break;  // Bail
                 }
                 
-                double Nab = N * zr * zi;
+                long double Nab = N * zr * zi;
                 zr = aa - bb + cr;
                 zi = Nab + ci;
                 n++;
@@ -330,7 +331,7 @@ void Mandelbrot(){   //Without Histogram coloring
         }
     }
 }
-void colors(){ //unused color wheel, map a n iterations to a color in the vector
+void colors(){ //unused color wheel, map n iterations to a color in the vector
     int r = 255;
     int b = 0;
     int g = 0;
